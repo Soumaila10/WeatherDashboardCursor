@@ -16,7 +16,11 @@ export function useWeather(initialCity = 'Paris') {
       setWeather(data.current);
       setForecast(data.forecast);
     } catch (e) {
+<<<<<<< HEAD
       setError("Impossible de récupérer les données météo.");
+=======
+      setError(e.message || 'Impossible de récupérer les données météo.');
+>>>>>>> 6164586 (feat: weather dashboard with OpenWeather API)
     } finally {
       setLoading(false);
     }

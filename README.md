@@ -50,9 +50,33 @@ Ensuite, ouvre l’URL indiquée dans le terminal (par défaut `http://localhost
 
 ### 🔧 Personnalisation & extension
 
+<<<<<<< HEAD
 - Pour brancher une vraie API météo, modifie simplement :
   - `src/services/weatherService.js`  
   Tu peux remplacer les données mockées par des appels HTTP réels (OpenWeather, Meteomatics, etc.) sans changer les composants UI.
+=======
+- L’app est branchée sur l’API **OpenWeatherMap** (données réelles) avec **fallback mock** :
+  - Si une clé API valide est présente, les données viennent d’OpenWeather (temps actuel + prévisions 5 jours).
+  - Si la clé manque ou si l’API échoue, l’app revient automatiquement sur les **données fictives** pour garder un rendu propre.
+
+- Pour activer les données réelles :
+  1. Crée un compte gratuit sur OpenWeatherMap.
+  2. Récupère ta clé API (Current Weather + 5 day / 3 hour forecast).
+  3. Crée un fichier `.env` à la racine du projet avec :
+
+     ```bash
+     VITE_OPENWEATHER_API_KEY=ta_cle_ici
+     ```
+
+  4. Redémarre le serveur de dev : `npm run dev`.
+
+- Toute la logique d’intégration API se trouve dans :
+  - `src/services/weatherService.js` (mapping des données OpenWeather → format UI)
+
+- Tu peux aussi adapter le style (thème, tailles, breakpoints) dans :
+  - `tailwind.config.js`
+  - `src/index.css`
+>>>>>>> 6164586 (feat: weather dashboard with OpenWeather API)
 
 - Le thème (dégradé, couleurs, ombres) est configurable dans :
   - `tailwind.config.js`
