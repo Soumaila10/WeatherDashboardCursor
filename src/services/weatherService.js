@@ -1,6 +1,6 @@
-<<<<<<< HEAD
-// Service météo utilisant des données fictives riches pour un rendu immédiat
+// Service météo : API OpenWeatherMap (données temps réel) + mode mock sans clé API
 
+// Données fictives riches pour un rendu immédiat (utilisées si aucune clé API n’est fournie)
 const mockCurrentWeather = {
   city: 'Paris',
   country: 'France',
@@ -79,40 +79,8 @@ const mockDailyForecast = [
   },
 ];
 
-// Simule un léger délai réseau pour une meilleure UX
+// Petit délai pour simuler un appel réseau en mode mock
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
-export async function fetchWeatherByCity(city) {
-  await wait(500);
-
-  if (!city) {
-    return {
-      current: mockCurrentWeather,
-      forecast: mockDailyForecast,
-    };
-  }
-
-  // On clone les datas et on adapte légèrement pour simuler une autre ville
-  const normalizedCity = city.trim();
-  const cityLabel = normalizedCity.charAt(0).toUpperCase() + normalizedCity.slice(1);
-
-  const current = {
-    ...mockCurrentWeather,
-    city: cityLabel,
-    updatedAt: 'Données simulées en temps réel',
-  };
-
-  const forecast = mockDailyForecast.map((day, index) => ({
-    ...day,
-    max: day.max + (index === 0 ? 1 : 0),
-    min: day.min + (index === 0 ? 1 : 0),
-  }));
-
-  return { current, forecast };
-}
-
-=======
-// Service météo : API OpenWeatherMap (clé API, données temps réel)
 
 // Clé API OpenWeather lue depuis les variables d'environnement Vite
 const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
@@ -235,10 +203,17 @@ export async function fetchWeatherByCity(city) {
   const targetCity = city?.trim() || 'Paris';
 
   try {
+    // Mode mock : aucune clé API fournie → on renvoie uniquement les données fictives
     if (!API_KEY) {
-      throw new Error(
-        "Clé API OpenWeather manquante. Ajoute VITE_OPENWEATHER_API_KEY dans ton fichier .env."
-      );
+      await wait(400);
+      const normalizedCity = targetCity.charAt(0).toUpperCase() + targetCity.slice(1);
+      const current = {
+        ...mockCurrentWeather,
+        city: normalizedCity,
+        updatedAt: 'Données fictives (aucune clé API configurée)',
+      };
+      const forecast = mockDailyForecast;
+      return { current, forecast };
     }
 
     // 1) Géocodage précis de la ville
@@ -313,5 +288,4 @@ export async function fetchWeatherByCity(city) {
     );
   }
 }
->>>>>>> 6164586 (feat: weather dashboard with OpenWeather API)
 

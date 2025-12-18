@@ -11,7 +11,7 @@ function App() {
     <div className="min-h-screen px-4 py-5 md:px-6 md:py-10 lg:px-10 lg:py-10">
       <div className="mx-auto max-w-6xl flex flex-col gap-5 md:gap-7 lg:gap-8">
         <header className="flex flex-col gap-4 md:gap-5">
-          <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center justify-center text-center">
             <div>
               <p className="text-xs uppercase tracking-[0.22em] text-slate-300 mb-1">
                 Weather Dashboard
@@ -19,12 +19,6 @@ function App() {
               <h1 className="text-xl md:text-2xl lg:text-3xl font-semibold tracking-tight">
                 Vue globale de la météo dans le monde
               </h1>
-            </div>
-            <div className="hidden sm:flex text-xs flex-col items-end text-slate-300">
-              <span>Glassmorphism • Thème sombre</span>
-              <span className="text-[11px] opacity-80">
-                Demo alimentée par des données fictives
-              </span>
             </div>
           </div>
 
@@ -90,13 +84,7 @@ function App() {
                 </li>
               </ul>
 
-              <div className="mt-auto pt-2 border-t border-white/10 text-[11px] text-slate-400">
-                Tu peux maintenant brancher une vraie API météo dans{' '}
-                <code className="bg-slate-900/70 px-1.5 py-0.5 rounded-md border border-white/10">
-                  src/services/weatherService.js
-                </code>{' '}
-                sans toucher au reste de l’UI.
-              </div>
+              <div className="mt-auto pt-2 border-t border-white/10 text-[11px] text-slate-400" />
             </aside>
           </main>
         )}
